@@ -45,7 +45,7 @@ const OtpModal = ({
 
       if (!sessionId)  throw new Error("No session returned");
 
-      await account.createSession(accountId, password); // browser side session
+      // await account.createSession(accountId, password); // browser side session
       // console.log("Session:", { sessionId, sessionSecret });
 
       if (sessionId) router.push("/");

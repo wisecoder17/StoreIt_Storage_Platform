@@ -3,7 +3,7 @@
 import { createAdminClient, createSessionClient } from "@/lib/appwrite";
 import { appwriteConfig } from "@/lib/appwrite/config";
 import { Query, ID } from "node-appwrite";
-import { parseStringify } from "@/lib/utils";
+import { parseStringify, handleError } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { avatarPlaceholderUrl } from "@/constants";
 import { redirect } from "next/navigation";
@@ -20,10 +20,6 @@ const getUserByEmail = async (email: string) => {
   return result.total > 0 ? result.documents[0] : null;
 };
 
-const handleError = (error: unknown, message: string) => {
-  console.log(error, message);
-  throw error;
-};
 
 export const sendEmailOTP = async ({ email }: { email: string }) => {
   const { account } = await createAdminClient();
@@ -88,13 +84,17 @@ export const verifySecret = async ({
     });
 
     return parseStringify({ sessionId: session.$id });
+    // console.log("Session created:", session); // session contains metadata os country details   
   } catch (error) {
     handleError(error, "Failed to verify OTP");
   }
 };
 
 export const getCurrentUser = async () => {
-  const { databases, account } = await createSessionClient();
+  const sessionClient = await createSessionClient({ required: true });
+  if (!sessionClient) return;
+
+  const { databases, account } = sessionClient;
 
   const result = await account.get();
 
@@ -110,7 +110,10 @@ export const getCurrentUser = async () => {
 };
 
 export const signOutUser = async () => {
-  const { account } = await createSessionClient();
+  const sessionClient = await createSessionClient({ required: true });
+  if (!sessionClient) return;
+
+  const { account } = sessionClient;
 
   try {
     await account.deleteSession("current");

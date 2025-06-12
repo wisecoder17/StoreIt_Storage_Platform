@@ -18,6 +18,7 @@ import {
 import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { account } from "@/lib/appwrite/client";
 import { verifySecret, sendEmailOTP } from "@/lib/actions/user.actions";
 import { useRouter } from "next/navigation";
 
@@ -37,12 +38,15 @@ const OtpModal = ({
     e.preventDefault();
     setIsLoading(true);
 
-    console.log({ accountId, password });
+    // console.log({ accountId, password });
 
     try {
       const sessionId = await verifySecret({ accountId, password });
 
-      console.log({ sessionId });
+      if (!sessionId)  throw new Error("No session returned");
+
+      await account.createSession(accountId, password); // browser side session
+      // console.log("Session:", { sessionId, sessionSecret });
 
       if (sessionId) router.push("/");
     } catch (error) {

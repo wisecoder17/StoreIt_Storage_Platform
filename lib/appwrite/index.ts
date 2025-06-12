@@ -29,8 +29,8 @@ export const createSessionClient = async (options?: { required?: boolean }) => {
   const session = (await cookies()).get("appwrite-session");
 
   if (!session?.value) {
-    handleError("No session found", "No session found");
-    if (options?.required) redirect("/auth/signin");
+    handleError("No session found", "No session found", false);
+    if (options?.required) redirect("/sign-in");
     return null;
   }
 

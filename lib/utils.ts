@@ -114,6 +114,8 @@ export const formatDateTime = (isoString: string | null | undefined) => {
   return `${time}, ${day} ${month}`;
 };
 
+export type FileType = "document" | "image" | "video" | "audio" | "other";
+
 export const getFileIcon = (
   extension: string | undefined,
   type: FileType | string,

@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { handleError } from "../utils";
 import { redirect } from "next/navigation";
 
-export const initAppwriteClient = (sessionToken?: string) => {
+export const initAppwriteClient = async (sessionToken?: string) => {
   const client = new Client()
     .setEndpoint(appwriteConfig.endpointUrl)
     .setProject(appwriteConfig.projectId);
@@ -29,7 +29,7 @@ export const createSessionClient = async (options?: { required?: boolean }) => {
   const session = (await cookies()).get("appwrite-session");
 
   if (!session?.value) {
-    handleError(new Error("No session found"), "No session found");
+    handleError("No session found", "No session found");
     if (options?.required) redirect("/auth/signin");
     return null;
   }
@@ -58,3 +58,5 @@ export const createAdminClient = async () => {
     },
   };
 };
+
+export {};

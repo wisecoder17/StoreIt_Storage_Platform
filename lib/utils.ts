@@ -7,9 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 export const parseStringify = (value: unknown) =>
   JSON.parse(JSON.stringify(value));
 
-export const handleError = (error: unknown, message: string) => {
+export const handleError = (error: unknown, message: string,  shouldThrow = true) => {
   console.log(error, message);
-  throw error;
+  if(shouldThrow) throw error;
 };
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 

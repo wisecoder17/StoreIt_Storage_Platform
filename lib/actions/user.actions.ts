@@ -75,16 +75,17 @@ export const verifySecret = async ({
     const { account } = await createAdminClient();
 
     const session = await account.createSession(accountId, password);
+    // console.log("Session created:", session); // session contains metadata os country details   
 
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
       sameSite: "strict",
       secure: true,
+      expires: new Date(Number(session.expire)),
     });
 
     return parseStringify({ sessionId: session.$id });
-    // console.log("Session created:", session); // session contains metadata os country details   
   } catch (error) {
     handleError(error, "Failed to verify OTP");
   }
@@ -117,11 +118,12 @@ export const signOutUser = async () => {
 
   try {
     await account.deleteSession("current");
-    (await cookies()).delete("appwrite-session");
+    (await cookies()).delete("appwrite-session");    
   } catch (error) {
     handleError(error, "Failed to sign out user");
   } finally {
     redirect("/sign-in");
+    console.log("User signed out successfully");
   }
 };
 

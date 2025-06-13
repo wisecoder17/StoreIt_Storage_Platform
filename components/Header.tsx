@@ -4,18 +4,22 @@ import Image from "next/image";
 import Search from "@/components/Search";
 import FileUploader from "@/components/FileUploader";
 import { signOutUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
 
 const Header = () => {
   return (
     <header className="header">
       <Search />
       <div className="header-wrapper">
-        <FileUploader />
+        <FileUploader ownerId={ownerId} accountId={accountId} />
         <form
           action={async () => {
             "use server";
 
-            await signOutUser();
+           const result = await signOutUser();
+           if (result?.success) {
+            redirect("/sign-in")
+           }
           }}
         >
           <Button type="submit" className="sign-out-button">

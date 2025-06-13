@@ -93,7 +93,7 @@ export const verifySecret = async ({
 
 export const getCurrentUser = async () => {
   const sessionClient = await createSessionClient({ required: true });
-  if (!sessionClient) return;
+  if (!sessionClient) return null;
 
   const { databases, account } = sessionClient;
 
@@ -119,10 +119,11 @@ export const signOutUser = async () => {
   try {
     await account.deleteSession("current");
     (await cookies()).delete("appwrite-session");    
+    return { success: true };
   } catch (error) {
     handleError(error, "Failed to sign out user");
   } finally {
-    redirect("/sign-in");
+    // redirect("/sign-in");
     console.log("User signed out successfully");
   }
 };

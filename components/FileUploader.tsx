@@ -22,6 +22,7 @@ const FileUploader = ({ ownerId, accountId, className }: Props) => {
   const path = usePathname();
   const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);
+  
 
   const onDrop = useCallback(
     async (acceptedFiles: File[]) => {

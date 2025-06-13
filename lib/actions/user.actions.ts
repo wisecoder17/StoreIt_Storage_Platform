@@ -6,7 +6,7 @@ import { Query, ID } from "node-appwrite";
 import { parseStringify, handleError } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { avatarPlaceholderUrl } from "@/constants";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
 const getUserByEmail = async (email: string) => {
   const { databases } = await createAdminClient();

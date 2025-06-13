@@ -6,7 +6,14 @@ import FileUploader from "@/components/FileUploader";
 import { signOutUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 
-const Header = () => {
+interface Props {
+  ownerId: string;
+  accountId: string;
+}
+const Header = ({
+  ownerId,
+  accountId,
+}: Props) => {
   return (
     <header className="header">
       <Search />

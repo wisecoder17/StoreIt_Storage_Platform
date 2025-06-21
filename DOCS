@@ -1,0 +1,4 @@
+haVE TO HANDLE uNAUTHENTICATED SESSION OR WHEN THERES INTERNET CONNECTION ISSUE FOR PERSISTING DATABASE
+then there can be error of unable to perform database action 
+
+handle server side server crash without affecting the client

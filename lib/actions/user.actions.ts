@@ -92,7 +92,7 @@ export const verifySecret = async ({
 };
 
 export const getCurrentUser = async () => {
-  const sessionClient = await createSessionClient({ required: true });
+  const sessionClient = await createSessionClient();
   if (!sessionClient) return null;
 
   const { databases, account } = sessionClient;

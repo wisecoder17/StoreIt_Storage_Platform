@@ -1,4 +1,54 @@
-haVE TO HANDLE uNAUTHENTICATED SESSION OR WHEN THERES INTERNET CONNECTION ISSUE FOR PERSISTING DATABASE
-then there can be error of unable to perform database action 
+~ haVE TO HANDLE uNAUTHENTICATED SESSION OR WHEN THERES INTERNET  ~ CONNECTION ISSUE FOR PERSISTING DATABASE
+~ then there can be error of unable to perform database action 
+~ handle server side server crash without affecting the client
 
-handle server side server crash without affecting the client
+graph network system to autosuggest users to share with 
+Add delay to the button loading upon signin
+A file viewer Module - siilar to drive
+A share module with selected permissions to stop db refetch of files upon activity operation
+read : https://appwrite.io/docs/advanced/platform/permissions
+
+
+
+
+
+
+import { Permission, Role } from "appwrite";
+
+export const generateDocumentPermissions = (ownerId, viewerIds = []) => {
+  const permissions = [
+    // Full access for the owner
+    Permission.read(Role.user(ownerId)),
+    Permission.update(Role.user(ownerId)),
+    Permission.delete(Role.user(ownerId)),
+  ];
+
+  // Add read-only access for other users
+  viewerIds.forEach((id) => {
+    if (id !== ownerId) {
+      permissions.push(Permission.read(Role.user(id)));
+    }
+  });
+
+  return permissions;
+};
+
+
+
+
+
+
+const ownerId = user.$id;
+const viewerIds = ['user1', 'user2', 'user3'];
+
+const permissions = generateDocumentPermissions(ownerId, viewerIds);
+
+const doc = await databases.createDocument(
+  appwriteConfig.databaseId,
+  appwriteConfig.collectionId,
+  ID.unique(),
+  {
+    ...data,
+  },
+  permissions
+);

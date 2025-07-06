@@ -19,7 +19,7 @@ export const initAppwriteClient = async (sessionToken?: string) => {
     client,
     account: new Account(client),
     databases: new Databases(client),
-    // storage: new Storage(client),
+    storage: new Storage(client),
     // avatars: new Avatars(client),
   };
 };

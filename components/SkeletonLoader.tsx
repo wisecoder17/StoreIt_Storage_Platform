@@ -11,7 +11,7 @@ import clsx from 'clsx';
 export function useSkeletonLoader<T>(
   fetchFunction: () => Promise<T>,
   deps: unknown[] = [],
-  delay = 500
+  delay: number = 500
 ) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<T | null>(null);

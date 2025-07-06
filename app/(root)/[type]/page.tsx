@@ -1,6 +1,6 @@
 import React from "react";
 import Sort from "@/components/Sort";
-import { getFileTypesParams } from "@/lib/utils";
+import { getFileTypesParams, FileType } from "@/lib/utils";
 import FileList from "@/components/FileList";
 
 const Page = async ({ searchParams, params }: SearchParamProps) => {

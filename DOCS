@@ -4,6 +4,8 @@
 
 graph network system to autosuggest users to share with 
 Add delay to the button loading upon signin
+Handle no intenet conection acces -- Caching!!
+
 A file viewer Module - siilar to drive
 A share module with selected permissions to stop db refetch of files upon activity operation
 read : https://appwrite.io/docs/advanced/platform/permissions

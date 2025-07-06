@@ -4,6 +4,7 @@ import { useSkeletonLoader } from "@/components/SkeletonLoader";
 import Card from "@/components/Card";
 import { Models } from "node-appwrite";
 import CardSkeleton from "./CardSkeleton";
+import { FileType } from "@/lib/utils";
 
 export default function FileList({
   types,
@@ -22,9 +23,10 @@ export default function FileList({
   const { isLoading, data: files } = useSkeletonLoader(fetchFiles, [
     types,
     searchText,
-    sort,
+    sort,  
   ], 500);
 
+  
   if (isLoading) {
     // Show 6 skeleton cards as a placeholder
     return (

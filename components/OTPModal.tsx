@@ -32,6 +32,7 @@ const OtpModal = ({
   const [isOpen, setIsOpen] = useState(true);
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -49,6 +50,7 @@ const OtpModal = ({
 
       if (sessionId) router.push("/");
     } catch (error) {
+      setErrorMessage("Failed to verify OTP. Please try again.");
       console.log("Failed to verify OTP", error);
     }
 
@@ -111,6 +113,7 @@ const OtpModal = ({
             </AlertDialogAction>
 
             <div className="subtitle-2 mt-2 text-center text-light-100">
+              {errorMessage && <p className="error-message">*{errorMessage}</p>}
               Didn&apos;t get a code?
               <Button
                 type="button"

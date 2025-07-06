@@ -2,6 +2,12 @@
 ~ then there can be error of unable to perform database action 
 ~ handle server side server crash without affecting the client
 
+<!-- serve session on client not server -->
+
+<!-- use try catch for await in user.actions to handle error -->
+
+
+
 ratelimiting on the email resend 
 create a succes modal popup 
 graph network system to autosuggest users to share with 
